@@ -1,3 +1,3 @@
-package com.nubank.domain
+package com.challenge.domain
 
 case class Account(activeCard: Boolean, availableLimit: Int, transactions: List[Transaction])

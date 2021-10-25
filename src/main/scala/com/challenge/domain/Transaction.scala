@@ -1,4 +1,4 @@
-package com.nubank.domain
+package com.challenge.domain
 
 import java.time.LocalDateTime
 

@@ -1,4 +1,4 @@
-package com.nubank.domain.validation
+package com.challenge.domain.validation
 
 import org.scalatest.funsuite.AnyFunSuite
 
