@@ -1,6 +1,6 @@
-package com.challenge.domain.validation
+package com.challenge.domain.validation.precondition
 
-import com.challenge.domain.validation.ValidationResult._
+import com.challenge.domain.validation.ValidationResult.{Failure, Success, ValidationResult}
 
 trait Precondition {
   val preCondition: () => Boolean

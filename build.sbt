@@ -2,8 +2,8 @@ import Dependencies._
 
 ThisBuild / scalaVersion     := "2.13.6"
 ThisBuild / version          := "0.1.0-SNAPSHOT"
-ThisBuild / organization     := "com.nubank"
-ThisBuild / organizationName := "nubank"
+ThisBuild / organization     := "com.challenge"
+ThisBuild / organizationName := "authorizer"
 
 lazy val root = (project in file("."))
   .settings(
@@ -18,3 +18,5 @@ libraryDependencies ++= Seq(
     "org.mockito"            %% "mockito-scala"        % "1.16.42" % Test,
     scalaTest % Test
 )
+
+Test / parallelExecution := false
