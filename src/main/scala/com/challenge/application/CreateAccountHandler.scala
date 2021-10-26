@@ -1,7 +1,8 @@
 package com.challenge.application
 
+import com.challenge.domain.validation.ACCOUNT_ALREADY_INITIALIZED_MESSAGE
 import com.challenge.domain.validation.ValidationResult._
-import com.challenge.domain.validation.{ACCOUNT_ALREADY_INITIALIZED_MESSAGE, Precondition}
+import com.challenge.domain.validation.precondition.Precondition
 import com.challenge.domain.{AccountRepository, OperationResult}
 
 class CreateAccountHandler(
