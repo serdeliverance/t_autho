@@ -1,4 +1,4 @@
-package com.challenge.domain.validation
+package com.challenge.domain.validation.entityvalidation
 
 import com.challenge.domain.validation.ValidationResult.ValidationResult
 import com.challenge.domain.{Account, Transaction}
