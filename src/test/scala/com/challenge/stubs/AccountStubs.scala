@@ -9,5 +9,9 @@ trait AccountStubs {
 
   val notInitializedAccount = Account(false, 100)
 
+  val accountWithLowLimit = Account(true, 5)
+
+  val accountWithSomeTransactions = Account(true, 100, List(transaction, transaction))
+
   val transaction = Transaction("burguer king", 10, LocalDateTime.now())
 }
