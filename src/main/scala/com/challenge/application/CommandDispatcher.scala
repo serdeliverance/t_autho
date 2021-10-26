@@ -1,12 +1,16 @@
 package com.challenge.application
 
-import com.challenge.domain.{AccountCreation, AccountService, AuthorizedTransaction, Command, OperationResult}
+import com.challenge.domain._
 
-class CommandDispatcher(accountService: AccountService) {
+class CommandDispatcher(
+  createAccountHandler: CreateAccountHandler,
+  authorizeTransactionHandler: AuthorizeTransactionHandler
+) {
 
-  def dispath(command: Command): OperationResult = command match {
+  def dispatch(command: Command): OperationResult = command match {
     case AccountCreation(activeCard, availableLimit) =>
-      accountService.createAccount(activeCard, availableLimit).liftOperationResult
-    case AuthorizedTransaction(merchant, amount, time) => ???
+      createAccountHandler.createAccount(activeCard, availableLimit)
+    case AuthorizedTransaction(merchant, amount, time) =>
+      authorizeTransactionHandler.authorizeTransaction(merchant, amount, time)
   }
 }

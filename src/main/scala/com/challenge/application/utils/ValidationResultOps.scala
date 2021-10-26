@@ -1,9 +1,10 @@
 package com.challenge.application.utils
 
-import com.challenge.domain.validation.ValidationResult
+import com.challenge.domain.validation.ValidationResult.ValidationResult
 
 object ValidationResultOps {
-  implicit class ValidationResultOps[T](validationResult: ValidationResult[T]) {
-    def isValid(): Boolean = validationResult.isRight
+  implicit class ValidationResultOps(validationResult: ValidationResult) {
+    def isValid(): Boolean    = validationResult.isRight
+    def isNotValid(): Boolean = validationResult.isLeft
   }
 }

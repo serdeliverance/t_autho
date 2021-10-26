@@ -1,6 +1,6 @@
 package com.challenge.application.utils
 
-import com.challenge.domain.validation.ValidationResult
+import com.challenge.domain.validation.ValidationResult.ValidationResult
 import com.challenge.domain.{Account, OperationResult}
 
 object OperationResultOps {
@@ -11,7 +11,7 @@ object OperationResultOps {
     }
   }
 
-  implicit class ValidatioResultToOperationResult(validationResult: ValidationResult[Any]) {
+  implicit class ValidatioResultToOperationResult(validationResult: ValidationResult) {
     def liftOperationResult(account: Option[Account] = None) =
       OperationResult(account, validationResult.left.getOrElse(List.empty))
   }

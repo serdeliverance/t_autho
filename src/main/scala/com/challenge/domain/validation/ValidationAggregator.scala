@@ -1,16 +1,16 @@
 package com.challenge.domain.validation
 
-import com.challenge.domain.{Account, Transaction}
+import com.challenge.application.utils.ValidationResultOps._
+import com.challenge.domain.validation.ValidationResult.{ValidationAction, ValidationResult}
 
-case class ValidationAggregator(validations: List[Validation]) {
-  def validate(account: Account, transaction: Transaction): ValidationResult[Account] = {
-    val violations = validations
-      .map(v => v.validate(account, transaction))
-      .collect {
-        case Left(message) => message
-      }
-      .flatten
-    if (violations.isEmpty) Right(account) else Left(violations)
-  }
+class ValidationAggregator {
 
+  def validateAll(validations: ValidationAction*): ValidationResult =
+    validations match {
+      case Nil => ValidationResult.valid
+      case ::(currentValidation, remainingValidations) =>
+        val validationResult = currentValidation()
+        if (validationResult.isNotValid()) validationResult
+        else validateAll(remainingValidations: _*)
+    }
 }
