@@ -1,7 +1,6 @@
 package com.challenge.application.utils
 
-import com.challenge.domain.validation.ValidationResult
-import com.challenge.domain.validation.ValidationResult.{Success, ValidationResult}
+import com.challenge.domain.validation.ValidationResult._
 import com.challenge.domain.{Account, OperationResult}
 
 object OperationResultOps {
@@ -14,9 +13,12 @@ object OperationResultOps {
 
   implicit class ValidationResultConverter(validationResult: ValidationResult) {
     def liftOperationResult() = validationResult match {
-      case ValidationResult.Failure(maybeAccount, violations) => OperationResult(maybeAccount, violations.toList)
-      case Success(maybeAccount)                              => OperationResult(maybeAccount)
+      case Failure(maybeAccount, violations) => OperationResult(maybeAccount, violations)
+      case Success(maybeAccount)             => OperationResult(maybeAccount)
     }
+  }
 
+  implicit class OptionAccountConverter(maybeAccount: Option[Account]) {
+    def liftOperationResult() = OperationResult(maybeAccount)
   }
 }

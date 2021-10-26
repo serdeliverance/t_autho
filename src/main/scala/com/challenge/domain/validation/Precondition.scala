@@ -1,10 +1,10 @@
 package com.challenge.domain.validation
 
-import com.challenge.domain.validation.ValidationResult.ValidationResult
+import com.challenge.domain.validation.ValidationResult._
 
 trait Precondition {
   val preCondition: () => Boolean
   val errorMessage: String
   def evalPrecondition(): ValidationResult =
-    if (preCondition()) ValidationResult.valid else ValidationResult.invalid(errorMessage)
+    if (preCondition()) Success() else Failure(None, List(errorMessage))
 }

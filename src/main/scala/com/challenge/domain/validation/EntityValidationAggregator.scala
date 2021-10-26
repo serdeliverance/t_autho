@@ -1,6 +1,6 @@
 package com.challenge.domain.validation
 
-import com.challenge.domain.validation.ValidationResult.ValidationResult
+import com.challenge.domain.validation.ValidationResult.{Failure, Success, ValidationResult, reduce}
 import com.challenge.domain.{Account, Transaction}
 
 case class EntityValidationAggregator(validations: List[EntityValidation]) {
@@ -8,10 +8,9 @@ case class EntityValidationAggregator(validations: List[EntityValidation]) {
     val violations = validations
       .map(v => v.validate(account, transaction))
       .collect {
-        case Left(message) => message
+        case violation @ Failure(_, _) => violation
       }
-      .flatten
-    if (violations.isEmpty) Right(account) else Left(violations)
+    if (violations.isEmpty) Success() else reduce(violations)
   }
 
 }

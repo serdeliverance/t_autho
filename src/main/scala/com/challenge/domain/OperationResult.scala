@@ -6,5 +6,5 @@ object OperationResult {
   def success(account: Account)                         = OperationResult(Some(account), List.empty)
   def failureWithEmptyAccount(violations: List[String]) = OperationResult(None, violations)
 
-  def apply(maybeAccount: Option[Account]) = OperationResult(maybeAccount, List.empty)
+  def apply(maybeAccount: Option[Account]): OperationResult = OperationResult(maybeAccount, List.empty)
 }

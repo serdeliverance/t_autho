@@ -1,29 +1,46 @@
 package com.challenge.application
 
-import com.challenge.domain.validation.{EntityValidationAggregator, Precondition, ValidationAggregator, ValidationResult}
+import com.challenge.application.utils.OperationResultOps.OptionAccountConverter
+import com.challenge.domain.validation.ValidationAggregator
+import com.challenge.domain.validation.ValidationResult._
 import com.challenge.domain.{AccountRepository, OperationResult, Transaction}
-import com.challenge.application.utils.ValidationResultOps._
 
 import java.time.LocalDateTime
 
 class AuthorizeTransactionHandler(
   accountRepository: AccountRepository,
-  precondition: Precondition,
-  validator: EntityValidationAggregator,
+//  precondition: Precondition, // near to be removed
+//  validator: EntityValidationAggregator, // near to be removed
   validationAggregator: ValidationAggregator
 ) {
 
   def authorizeTransaction(merchant: String, amount: Int, time: LocalDateTime): OperationResult = {
-    val validationResult = validationAggregator.validateAll(
-      () => precondition.evalPrecondition(),
-      () =>
+    // TODO remember this value must be passed on demand to valiationAggregator who will pass around to the
+    // different entity validation
+    val transaction = Transaction(merchant, amount, time)
+
+    // TODO move this to initialization o validationAggregator (and then remove precondition and validator from constructor)
+//    val validationResult = validationAggregator.validateAll(
+//      () => precondition.evalPrecondition(),
+//      () =>
+//        accountRepository
+//          .get()
+//          .map(account => validator.validate(account, transaction))
+//          .getOrElse(ValidationResult.invalid(List("invalid account")))
+//    )
+
+    // TODO add validations on validateAll()
+    validationAggregator.validateAll() match {
+      case Failure(maybeAccount, violations) => OperationResult(maybeAccount, violations)
+      case Success(_) =>
         accountRepository
           .get()
-          .map(account => validator.validate(account, Transaction(merchant, amount, time)))
-          .getOrElse(ValidationResult.invalid("invalid account"))
-    )
-
-    if (validationResult.isNotValid()) OperationResult.validationResult
+          .map { account =>
+            val updatedAccount = account.process(transaction)
+            accountRepository.update(updatedAccount)
+          }
+          .liftOperationResult()
+    }
   }
 
 }
