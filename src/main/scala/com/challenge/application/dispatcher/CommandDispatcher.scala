@@ -1,8 +1,9 @@
-package com.challenge.application
+package com.challenge.application.dispatcher
 
+import com.challenge.application.handler.{AuthorizeTransactionHandler, CreateAccountHandler}
 import com.challenge.domain._
 
-class CommandDispatcher(
+case class CommandDispatcher(
   createAccountHandler: CreateAccountHandler,
   authorizeTransactionHandler: AuthorizeTransactionHandler
 ) {

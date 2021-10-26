@@ -1,10 +1,10 @@
-package com.challenge.application
+package com.challenge.application.handler
 
 import com.challenge.domain.validation.ValidationResult._
 import com.challenge.domain.validation.precondition.Precondition
 import com.challenge.domain.{AccountRepository, OperationResult}
 
-class CreateAccountHandler(
+case class CreateAccountHandler(
   accountRepository: AccountRepository,
   precondition: Precondition
 ) {

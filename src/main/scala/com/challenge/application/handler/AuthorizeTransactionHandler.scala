@@ -1,4 +1,4 @@
-package com.challenge.application
+package com.challenge.application.handler
 
 import com.challenge.application.utils.OperationResultOps.OptionAccountConverter
 import com.challenge.domain.validation.ValidationAggregator
@@ -7,7 +7,7 @@ import com.challenge.domain.{AccountRepository, OperationResult, Transaction}
 
 import java.time.LocalDateTime
 
-class AuthorizeTransactionHandler(
+case class AuthorizeTransactionHandler(
   accountRepository: AccountRepository,
 //  precondition: Precondition, // near to be removed
 //  validator: EntityValidationAggregator, // near to be removed
