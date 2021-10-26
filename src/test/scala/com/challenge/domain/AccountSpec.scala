@@ -19,4 +19,8 @@ class AccountSpec extends AnyFunSuite {
 
     assertResult(70)(result)
   }
+
+  // TODO test last transaction
+
+  // TODO test last transaction when account has not transaction
 }
