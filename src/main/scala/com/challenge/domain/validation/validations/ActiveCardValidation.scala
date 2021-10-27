@@ -6,11 +6,8 @@ import com.challenge.domain.validation._
 
 class ActiveCardValidation() extends Validation {
 
-  def validate(accountProvider: AccountProvider, transaction: Transaction): ValidationResult =
-    accountProvider
-      .get()
-      .map { account =>
-        if (account.activeCard) Success(Some(account)) else Failure(None, List(CARD_NOT_ACTIVE_MESSAGE))
-      }
-      .value
+  def validate(transaction: Transaction)(implicit accountProvider: AccountProvider): ValidationResult =
+    accountProvider().map { account =>
+      if (account.activeCard) Success(Some(account)) else Failure(None, List(CARD_NOT_ACTIVE_MESSAGE))
+    }.value
 }

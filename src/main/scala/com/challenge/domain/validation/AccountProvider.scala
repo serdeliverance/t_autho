@@ -1,7 +1,8 @@
 package com.challenge.domain.validation
 
-import com.challenge.domain.Account
+import com.challenge.domain.AccountRepository
 
-trait AccountProvider {
-  def get(): Option[Account]
+object AccountProvider {
+  def defaultAccountProvider(accountRepository: AccountRepository): AccountProvider =
+    () => accountRepository.get()
 }
