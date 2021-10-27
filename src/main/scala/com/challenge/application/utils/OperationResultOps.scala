@@ -4,6 +4,6 @@ import com.challenge.domain.{Account, OperationResult}
 
 object OperationResultOps {
   implicit class OptionAccountConverter(maybeAccount: Option[Account]) {
-    def liftOperationResult() = OperationResult(maybeAccount)
+    def value = OperationResult(maybeAccount)
   }
 }
