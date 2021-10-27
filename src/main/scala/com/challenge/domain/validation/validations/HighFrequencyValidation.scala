@@ -1,5 +1,6 @@
 package com.challenge.domain.validation.validations
 
+import com.challenge.domain.TransactionOps.TransactionExtensionMethods
 import com.challenge.domain._
 import com.challenge.domain.utils.Interval
 import com.challenge.domain.validation.ValidationResultOps.OptionValidationResultOps
