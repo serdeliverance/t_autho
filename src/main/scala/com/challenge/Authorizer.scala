@@ -3,7 +3,6 @@ package com.challenge
 import cats.effect.{ExitCode, IO, IOApp}
 import com.challenge.application.dispatcher.CommandDispatcher
 import com.challenge.application.handler.{AuthorizeTransactionHandler, CreateAccountHandler}
-import com.challenge.domain.validation.precondition.AccountNotInitializedPrecondition
 import com.challenge.infrastructure.repository.InmemoryAccountRepository
 
 object Authorizer extends IOApp {

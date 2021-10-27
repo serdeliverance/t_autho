@@ -1,18 +1,10 @@
 package com.challenge.domain.validation
 
+import com.challenge.domain.Transaction
 import com.challenge.domain.validation.ValidationResult._
 
-class ValidationAggregator() {
+class ValidationAggregator(validations: List[Validation]) extends Validation {
 
-  def validateAll(validations: ValidationAction*): ValidationResult =
-    validations match {
-      case Nil => Success()
-      case ::(currentValidation, remainingValidations) =>
-        val validationResult = currentValidation()
-
-        validationResult match {
-          case Failure(_, _) => validationResult
-          case Success(_)    => validateAll(remainingValidations: _*)
-        }
-    }
+  def validate(accountProvider: AccountProvider, transaction: Transaction): ValidationResult =
+    reduce(validations.map(v => v.validate(accountProvider, transaction)))
 }

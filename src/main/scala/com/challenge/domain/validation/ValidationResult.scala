@@ -4,17 +4,11 @@ import cats.Semigroup
 import cats.implicits._
 import com.challenge.domain.Account
 
+sealed trait ValidationResult
+case class Failure(maybeAccount: Option[Account], violations: List[String]) extends ValidationResult
+case class Success(maybeAccount: Option[Account] = None)                    extends ValidationResult
+
 object ValidationResult {
-
-  sealed trait ValidationResult
-  case class Failure(maybeAccount: Option[Account], violations: List[String]) extends ValidationResult
-  case class Success(maybeAccount: Option[Account] = None)                    extends ValidationResult
-
-  type ValidationAction = () => ValidationResult
-
-  def valid(maybeAccount: Option[Account] = None): ValidationResult = Success(maybeAccount)
-  def invalid(violations: List[String], maybeAccount: Option[Account] = None): ValidationResult =
-    Failure(maybeAccount, violations)
 
   def reduce(validationResults: List[ValidationResult]): ValidationResult = validationResults.fold(Success())(_ |+| _)
 
