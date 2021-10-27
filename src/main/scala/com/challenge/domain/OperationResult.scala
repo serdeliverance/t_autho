@@ -1,5 +1,6 @@
 package com.challenge.domain
 
+// TODO el operation result deberia retornar un AccountBalance(activeCard, availableLimit) para esto hay que refactorizar esta clase y crear la case class AccountBalance... tambien hay que refactorizar los smart constructors
 case class OperationResult(account: Option[Account], violations: List[String])
 
 object OperationResult {

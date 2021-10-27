@@ -1,5 +1,6 @@
 package com.challenge.domain.validation.validations
 
+import com.challenge.domain.AccountRepository
 import com.challenge.domain.validation._
 import com.challenge.stubs.AccountStubs
 import org.mockito.Mockito.when
@@ -9,21 +10,23 @@ import org.scalatest.matchers.must.Matchers
 
 class AccountInitializedValidationSpec extends AnyFunSuite with Matchers with AccountStubs {
 
-  private val accountProvider = mock[AccountProvider]
-  private val validation      = new AccountInitializedValidation()
+  private val accountRepository        = mock[AccountRepository]
+  implicit private val accountProvider = () => accountRepository.get()
+
+  private val validation = new AccountInitializedValidation()
 
   test("account already initialized precondition success") {
-    when(accountProvider.get()).thenReturn(Some(activatedAccount))
+    when(accountRepository.get()).thenReturn(Some(activatedAccount))
 
-    val result = validation.validate(accountProvider, transaction)
+    val result = validation.validate(transaction)
 
     result mustBe Success()
   }
 
   test("account already initialized precondition fails") {
-    when(accountProvider.get()).thenReturn(None)
+    when(accountRepository.get()).thenReturn(None)
 
-    val result = validation.validate(accountProvider, transaction)
+    val result = validation.validate(transaction)
 
     result mustBe Failure(None, List(ACCOUNT_NOT_INITIALIZED_MESSAGE))
   }

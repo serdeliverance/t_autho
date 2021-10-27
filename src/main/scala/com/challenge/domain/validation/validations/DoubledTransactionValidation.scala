@@ -10,14 +10,11 @@ import java.time.LocalDateTime
 
 class DoubledTransactionValidation(intervalInMinutes: Int, maxAllowed: Int) extends Validation {
 
-  def validate(accountProvider: AccountProvider, transaction: Transaction): ValidationResult =
-    accountProvider
-      .get()
-      .map { account =>
-        val interval = Interval(LocalDateTime.now().minusMinutes(intervalInMinutes), LocalDateTime.now())
-        if (account.transactions.count(t => interval.isOnInterval(t.time) && t == transaction) >= maxAllowed)
-          Failure(Some(account), List(DOUBLED_TRANSACTION_MESSAGE))
-        else Success()
-      }
-      .value
+  def validate(transaction: Transaction)(implicit accountProvider: AccountProvider): ValidationResult =
+    accountProvider().map { account =>
+      val interval = Interval(LocalDateTime.now().minusMinutes(intervalInMinutes), LocalDateTime.now())
+      if (account.transactions.count(t => interval.isOnInterval(t.time) && t == transaction) >= maxAllowed)
+        Failure(Some(account), List(DOUBLED_TRANSACTION_MESSAGE))
+      else Success()
+    }.value
 }
