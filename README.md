@@ -1,5 +1,9 @@
-# XXXXXXXXXXXXXXXXxx
+# XXXXXXXXXXXXXXXXXX
 
-## Notes
+## TODO
 
-* I use inmemory data value as repository to keep it simple. Even operations against repository returns synchronous datatypes (a pure value, not an IO[Accout], for example)
+* acomodar packages en test
+* agregar test de la capa de dominio
+* implementar capa adapter (fs2)
+* cableado y run de la app
+* mejorar el readme
