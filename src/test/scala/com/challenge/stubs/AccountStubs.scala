@@ -1,6 +1,6 @@
 package com.challenge.stubs
 
-import com.challenge.domain.{Account, Transaction}
+import com.challenge.domain.entity.{Account, Transaction}
 
 import java.time.LocalDateTime
 
