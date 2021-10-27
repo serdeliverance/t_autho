@@ -1,4 +1,4 @@
-package com.challenge.domain.validation.entityvalidation
+package com.challenge.domain.validation.validations
 
 import org.scalatest.funsuite.AnyFunSuite
 

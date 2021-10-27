@@ -1,13 +1,14 @@
 package com.challenge.application.handler
 
 import com.challenge.application.utils.OperationResultOps.OptionAccountConverter
-import com.challenge.domain.validation.ValidationAggregator
-import com.challenge.domain.validation.ValidationResult._
+import com.challenge.domain.validation._
+import com.challenge.domain.validation.validations.ValidationAggregator
 import com.challenge.domain.{AccountRepository, OperationResult, Transaction}
 
 import java.time.LocalDateTime
 
 case class AuthorizeTransactionHandler(
+  accountProvider: AccountProvider,
   accountRepository: AccountRepository,
 //  precondition: Precondition, // near to be removed
 //  validator: EntityValidationAggregator, // near to be removed
@@ -30,7 +31,7 @@ case class AuthorizeTransactionHandler(
 //    )
 
     // TODO add validations on validateAll()
-    validationAggregator.validateAll() match {
+    validationAggregator.validate(accountProvider, transaction) match {
       case Failure(maybeAccount, violations) => OperationResult(maybeAccount, violations)
       case Success(_) =>
         accountRepository

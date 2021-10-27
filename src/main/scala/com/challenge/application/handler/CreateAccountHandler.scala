@@ -1,15 +1,16 @@
 package com.challenge.application.handler
 
-import com.challenge.domain.validation.ValidationResult._
-import com.challenge.domain.validation.precondition.Precondition
-import com.challenge.domain.{AccountRepository, OperationResult}
+import com.challenge.domain.validation._
+import com.challenge.domain.validation.validations.ValidationAggregator
+import com.challenge.domain.{AccountRepository, EmptyTransaction, OperationResult}
 
 case class CreateAccountHandler(
+  accountProvider: AccountProvider, // TODO ver que hacer con account provider... si dejarlo como una clase o como un type alias
   accountRepository: AccountRepository,
-  precondition: Precondition
+  validatorAggregator: ValidationAggregator
 ) {
   def createAccount(activeCard: Boolean, availableLimit: Int): OperationResult =
-    precondition.evalPrecondition() match {
+    validatorAggregator.validate(accountProvider, EmptyTransaction) match {
       case Failure(maybeAccount, violations) => OperationResult(maybeAccount, violations)
       case Success(_) =>
         val account = accountRepository.create(activeCard, availableLimit)
