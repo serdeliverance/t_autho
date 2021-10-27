@@ -6,12 +6,9 @@ import com.challenge.domain.validation.ValidationResultOps.OptionValidationResul
 import com.challenge.domain.validation._
 
 class SufficientLimitValidation extends Validation {
-  def validate(accountProvider: AccountProvider, transaction: Transaction): ValidationResult =
-    accountProvider
-      .get()
-      .map { account =>
-        if (account.balance() - transaction.amount >= 0) Success()
-        else Failure(Some(account), List(INSUFFICIENT_LIMIT_MESSAGE))
-      }
-      .value
+  def validate(transaction: Transaction)(implicit accountProvider: AccountProvider): ValidationResult =
+    accountProvider().map { account =>
+      if (account.balance() - transaction.amount >= 0) Success()
+      else Failure(Some(account), List(INSUFFICIENT_LIMIT_MESSAGE))
+    }.value
 }

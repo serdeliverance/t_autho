@@ -4,6 +4,6 @@ import com.challenge.domain.Transaction
 import com.challenge.domain.validation._
 
 class AccountInitializedValidation() extends Validation {
-  def validate(accountProvider: AccountProvider, transaction: Transaction): ValidationResult =
-    if (accountProvider.get().nonEmpty) Success() else Failure(None, List(ACCOUNT_NOT_INITIALIZED_MESSAGE))
+  def validate(transaction: Transaction)(implicit accountProvider: AccountProvider): ValidationResult =
+    if (accountProvider().nonEmpty) Success() else Failure(None, List(ACCOUNT_NOT_INITIALIZED_MESSAGE))
 }
