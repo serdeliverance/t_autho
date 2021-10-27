@@ -1,4 +1,4 @@
-package com.challenge.application.handler
+package com.challenge.application.service
 
 import com.challenge.application.utils.OperationResultOps.OptionAccountConverter
 import com.challenge.domain.validation._

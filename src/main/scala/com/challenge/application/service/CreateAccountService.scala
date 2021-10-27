@@ -1,4 +1,4 @@
-package com.challenge.application.handler
+package com.challenge.application.service
 
 import com.challenge.domain.validation._
 import com.challenge.domain.validation.validations.ValidationAggregator
@@ -16,5 +16,4 @@ case class CreateAccountHandler(
         val account = accountRepository.create(activeCard, availableLimit)
         OperationResult.success(account)
     }
-
 }
