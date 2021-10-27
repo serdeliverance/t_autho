@@ -2,7 +2,7 @@ package com.challenge.domain.usecase
 
 import com.challenge.application.port.in.AuthorizeTransaction
 import com.challenge.application.port.out.AccountRepository
-import com.challenge.application.utils.OperationResultOps.OptionAccountConverter
+import com.challenge.domain.entity.OperationResultOps.OptionAccountConverter
 import com.challenge.domain.entity.validation.AccountProvider.defaultAccountProvider
 import com.challenge.domain.entity.validation.validations.ValidationAggregator
 import com.challenge.domain.entity.validation.{Failure, Success}
