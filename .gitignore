@@ -4,7 +4,6 @@ tmp
 .target
 *.class
 *.log
-out
 /bin
 
 # sbt specific

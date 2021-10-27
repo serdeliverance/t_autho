@@ -1,5 +1,6 @@
 package com.challenge.domain
 
+import com.challenge.domain.entity.{Account, Transaction}
 import org.scalatest.funsuite.AnyFunSuite
 
 import java.time.LocalDateTime
