@@ -4,6 +4,6 @@ import com.challenge.domain.entity.OperationResult
 
 import java.time.LocalDateTime
 
-trait AuthorizeTransaction {
+trait AuthorizeTransactionService {
   def authorizeTransaction(merchant: String, amount: Int, time: LocalDateTime): OperationResult
 }
