@@ -10,3 +10,7 @@ class ValidationAggregator(validations: List[Validation]) extends Validation {
   def validate(transaction: Transaction)(implicit accountProvider: AccountProvider): ValidationResult =
     reduce(validations.map(v => v.validate(transaction)))
 }
+
+object ValidationAggregator {
+  def apply(validations: Validation*) = new ValidationAggregator(validations.toList)
+}
