@@ -2,11 +2,12 @@ package com.challenge.domain.usecase
 
 import com.challenge.application.port.in.AuthorizeTransactionService
 import com.challenge.application.port.out.AccountRepository
+import com.challenge.domain.entity
+import com.challenge.domain.entity.OperationResult._
 import com.challenge.domain.entity.OperationResultOps.OptionAccountConverter
 import com.challenge.domain.entity.validation.AccountProvider.defaultAccountProvider
 import com.challenge.domain.entity.validation.validations.ValidationAggregator
 import com.challenge.domain.entity.validation.{Failure, Success}
-import com.challenge.domain.entity
 import com.challenge.domain.entity.{OperationResult, Transaction}
 
 import java.time.LocalDateTime
@@ -23,7 +24,7 @@ case class AuthorizeTransactionUseCase(
     val transaction = Transaction(merchant, amount, time)
 
     validationAggregator.validate(transaction) match {
-      case Failure(maybeAccount, violations) => entity.OperationResult(maybeAccount, violations)
+      case Failure(maybeAccount, violations) => OperationResult.failure(maybeAccount, violations)
       case Success(_) =>
         accountRepository
           .get()
