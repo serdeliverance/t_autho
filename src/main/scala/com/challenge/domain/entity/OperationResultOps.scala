@@ -1,6 +1,4 @@
-package com.challenge.application.utils
-
-import com.challenge.domain.entity.{Account, OperationResult}
+package com.challenge.domain.entity
 
 object OperationResultOps {
   implicit class OptionAccountConverter(maybeAccount: Option[Account]) {

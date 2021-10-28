@@ -1,8 +1,8 @@
 package com.challenge.domain.usecase
 
-import com.challenge.application.port.in.AuthorizeTransaction
+import com.challenge.application.port.in.AuthorizeTransactionService
 import com.challenge.application.port.out.AccountRepository
-import com.challenge.application.utils.OperationResultOps.OptionAccountConverter
+import com.challenge.domain.entity.OperationResultOps.OptionAccountConverter
 import com.challenge.domain.entity.validation.AccountProvider.defaultAccountProvider
 import com.challenge.domain.entity.validation.validations.ValidationAggregator
 import com.challenge.domain.entity.validation.{Failure, Success}
@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 case class AuthorizeTransactionUseCase(
   accountRepository: AccountRepository,
   validationAggregator: ValidationAggregator
-) extends AuthorizeTransaction {
+) extends AuthorizeTransactionService {
 
   implicit val accountProvider = defaultAccountProvider(accountRepository)
 
