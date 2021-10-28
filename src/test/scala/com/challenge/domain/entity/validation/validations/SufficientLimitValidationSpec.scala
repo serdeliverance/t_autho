@@ -3,6 +3,7 @@ package com.challenge.domain.entity.validation.validations
 import com.challenge.application.port.out.AccountRepository
 import com.challenge.domain.entity.validation.AccountProvider.defaultAccountProvider
 import com.challenge.domain.entity.validation._
+import com.challenge.domain.entity.validation.validations.validation.INSUFFICIENT_LIMIT_MESSAGE
 import com.challenge.stubs.AccountStubs
 import org.mockito.MockitoSugar
 import org.scalatest.funsuite.AnyFunSuite
