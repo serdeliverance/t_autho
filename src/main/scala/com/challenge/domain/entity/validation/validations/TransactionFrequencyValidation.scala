@@ -8,7 +8,7 @@ import com.challenge.domain.entity.{Interval, Transaction}
 
 import java.time.LocalDateTime
 
-class HighFrequencyValidation(val intervalInMinutes: Int, val maxAllowed: Int) extends Validation {
+class TransactionFrequencyValidation(val intervalInMinutes: Int, val maxAllowed: Int) extends Validation {
   def validate(transaction: Transaction)(implicit accountProvider: AccountProvider): ValidationResult =
     accountProvider().map { account =>
       val interval = Interval(LocalDateTime.now().minusMinutes(intervalInMinutes), LocalDateTime.now())
