@@ -2,7 +2,7 @@ package com.challenge.adapter.in.stdin
 
 import cats.effect.IO
 import com.challenge.adapter.command.CommandHandler
-import com.challenge.adapter.json.JsonInput
+import com.challenge.adapter.json.JsonInput.JsonInput
 import com.challenge.adapter.json.JsonInputOps.JsonInputDomainCommandConverter
 import com.challenge.adapter.json.JsonParsing._
 import fs2.io.{stdin, stdout}
@@ -26,6 +26,7 @@ class StdinReader(commandHandler: CommandHandler) {
       .map(command => commandHandler.handle(command))
       .map(operationResult => operationResult.asJson)
       .map(_.noSpaces)
+      .map(line => line + System.lineSeparator())
       .through(text.utf8.encode)
       .through(stdout[IO])
 }

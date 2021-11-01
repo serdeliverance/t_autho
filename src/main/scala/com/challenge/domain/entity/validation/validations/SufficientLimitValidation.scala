@@ -1,6 +1,5 @@
 package com.challenge.domain.entity.validation.validations
 
-import com.challenge.domain.entity.TransactionOps.TransactionExtensionMethods
 import com.challenge.domain.entity.Transaction
 import com.challenge.domain.entity.validation.ValidationResultOps.OptionValidationResultOps
 import com.challenge.domain.entity.validation._
