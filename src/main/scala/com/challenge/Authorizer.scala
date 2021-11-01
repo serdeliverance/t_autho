@@ -26,10 +26,7 @@ object Authorizer extends IOApp {
         config.highFrequencyInterval,
         config.highFrequencyMaxAllowed
       )
-      doubledTransactionValidation = new DoubledTransactionValidation(
-        config.doubledTransactionInterval,
-        config.doubledTransactionMaxAllowed
-      )
+      doubledTransactionValidation = new DoubledTransactionValidation(config.doubledTransactionInterval)
 
       authorizeValidationAggregator = ValidationAggregator(
         accountInitializedValidation,
@@ -48,9 +45,8 @@ object Authorizer extends IOApp {
 
       // adapter in
       stdinReader = new StdinReader(commandHandler)
-      _ <- stdinReader.read().compile.drain
-    } yield ()
+    } yield stdinReader
 
   override def run(args: List[String]): IO[ExitCode] =
-    createApp().map(_ => ExitCode.Success)
+    createApp().flatMap(reader => reader.read().compile.drain).as(ExitCode.Success)
 }

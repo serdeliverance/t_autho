@@ -9,8 +9,7 @@ object Configuration {
   case class AuthorizerConfiguration(
     highFrequencyInterval: Int,
     highFrequencyMaxAllowed: Int,
-    doubledTransactionInterval: Int,
-    doubledTransactionMaxAllowed: Int
+    doubledTransactionInterval: Int
   )
 
   def loadConfiguration: IO[AuthorizerConfiguration] =

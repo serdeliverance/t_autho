@@ -5,7 +5,10 @@ ThisBuild / version          := "0.1.0-SNAPSHOT"
 ThisBuild / organization     := "com.challenge"
 ThisBuild / organizationName := "authorizer"
 
+scalacOptions += "-Ymacro-annotations"
+
 lazy val root = (project in file("."))
+  .enablePlugins(JavaAppPackaging)
   .settings(
     name := "authorizer",
   )
@@ -30,3 +33,5 @@ libraryDependencies ++= Seq(
 )
 
 Test / parallelExecution := false
+
+executableScriptName := "authorizer.sh"

@@ -1,17 +1,17 @@
-package com.challenge.domain
+package com.challenge.domain.entity
 
-import com.challenge.domain.entity.{Account, Transaction}
 import org.scalatest.funsuite.AnyFunSuite
 
-import java.time.LocalDateTime
+import java.time.Instant
+import java.time.temporal.ChronoUnit
 
 class AccountSpec extends AnyFunSuite {
   // TODO process transaction
 
   test("calculate balance correctly") {
     val transactions = List(
-      Transaction("burger king", 10, LocalDateTime.now().minusDays(2)),
-      Transaction("Mc Donalds", 20, LocalDateTime.now().minusDays(2))
+      Transaction("burger king", 10, Instant.now().minus(2, ChronoUnit.DAYS)),
+      Transaction("Mc Donalds", 20, Instant.now().minus(2, ChronoUnit.DAYS))
     )
 
     val account = Account(true, 100, transactions)

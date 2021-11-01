@@ -2,7 +2,7 @@ package com.challenge.stubs
 
 import com.challenge.domain.entity.{Account, Transaction}
 
-import java.time.LocalDateTime
+import java.time.{Instant, LocalDateTime}
 
 trait AccountStubs {
   val activatedAccount = Account(true, 100)
@@ -11,7 +11,7 @@ trait AccountStubs {
 
   val accountWithLowLimit = Account(true, 5)
 
-  val accountWithSomeTransactions = Account(true, 100, List(transaction, transaction))
+  val transaction = Transaction("burguer king", 10, Instant.now())
 
-  val transaction = Transaction("burguer king", 10, LocalDateTime.now())
+  val accountWithSomeTransactions = Account(true, 100, List(transaction, transaction))
 }
