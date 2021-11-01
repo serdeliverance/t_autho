@@ -41,10 +41,10 @@ object Authorizer extends IOApp {
       authorizeAccountService = AuthorizeTransactionUseCase(accountRepository, authorizeValidationAggregator)
 
       // command handler
-      commandHandler = new CommandHandler(authorizeAccountService, createAccountService)
+      commandHandler = CommandHandler(authorizeAccountService, createAccountService)
 
       // adapter in
-      stdinReader = new StdinReader(commandHandler)
+      stdinReader = StdinReader(commandHandler)
     } yield stdinReader
 
   override def run(args: List[String]): IO[ExitCode] =

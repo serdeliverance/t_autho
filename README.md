@@ -2,6 +2,7 @@
 
 ## TODO
 
-* acomodar packages en test
-* agregar test de la capa de dominio
+* terminar tests
+* pruebas funcionales con los escenarios del enunciado
+* instrucciones para le ejecución/empaquetado
 * mejorar el readme

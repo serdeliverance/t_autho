@@ -10,7 +10,7 @@ import fs2.{INothing, Stream, text}
 import io.circe.parser.decode
 import io.circe.syntax._
 
-class StdinReader(commandHandler: CommandHandler) {
+case class StdinReader(commandHandler: CommandHandler) {
 
   def read(): Stream[IO, INothing] =
     stdin[IO](512)
