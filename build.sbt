@@ -8,7 +8,6 @@ ThisBuild / organizationName := "authorizer"
 scalacOptions += "-Ymacro-annotations"
 
 lazy val root = (project in file("."))
-  .enablePlugins(JavaAppPackaging)
   .settings(
     name := "authorizer",
   )
@@ -32,6 +31,6 @@ libraryDependencies ++= Seq(
     scalaTest % Test
 )
 
-Test / parallelExecution := false
+assembly / assemblyJarName := s"${name.value}"
 
-executableScriptName := "authorizer.sh"
+Test / parallelExecution := false
