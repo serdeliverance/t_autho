@@ -1,6 +1,6 @@
 # Authorizer
 
-## Design and architecutre
+## Design and architecture
 
 `TODO`
 
@@ -9,16 +9,16 @@
 * `Scala`
 * `Cats Effect` for effect management
 * `Circe` for json parsing
-* `FS2` for stream processing
+* `Fs2` for stream processing
 * `Mockito` for testing
 
 ## Requisites
 
-* SBT > 1.3
+* Docker
 
 ## Instructions
 
-Build the app:
+Build the image:
 
 ```
 ./build.sh
@@ -27,11 +27,10 @@ Build the app:
 To run the app:
 
 ```
-./run.sh
+./run.sh < cat <<your-input-file.txt>>
 ```
 
 ## TODO
 
 * pruebas funcionales con los escenarios del enunciado
-* instrucciones para le ejecución/empaquetado
 * mejorar el readme
