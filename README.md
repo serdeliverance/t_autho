@@ -1,4 +1,4 @@
-# Authorizer
+# Transaction Processor (t_autho)
 
 ## Stack
 
